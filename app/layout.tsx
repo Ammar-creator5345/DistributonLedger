@@ -13,7 +13,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Distribution Ledger",
+  title: {
+    default: "HAJI M SHAFFI AND SON",
+    template: "%s · HAJI M SHAFFI AND SON",
+  },
   description: "Distribution and inventory ledger",
 };
 

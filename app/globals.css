@@ -207,6 +207,21 @@
 }
 
 /*
+  Row height for every table's body/footer cells: 48px, matching the Vouchers table (its own
+  height comes naturally from its 32px icon-button actions column + padding — this just makes
+  every other table match it exactly). Deliberately `height`, not `min-height` — verified
+  against a real rendered page that Chrome's table row-sizing algorithm silently ignores
+  `min-height` on a <td> (computed style reports it correctly, but it has zero effect on the
+  actual box), while `height` is respected and still lets a cell grow taller than 48px when its
+  own content needs more room (e.g. the 45px input fields elsewhere). Also needs !important,
+  same reason as the input-height rule above: a plain Tailwind utility class on <td> lost to
+  MUI's own emotion-injected TableCell styles despite having higher CSS specificity on paper.
+*/
+.MuiTableCell-root {
+  height: 48px !important;
+}
+
+/*
   Custom scrollbar, applied everywhere content scrolls (page body, sidebar nav, dialogs,
   table overflow containers) instead of the browser default. Colors are drawn from the
   existing --border / --muted-foreground tokens so it matches the theme in both light and
