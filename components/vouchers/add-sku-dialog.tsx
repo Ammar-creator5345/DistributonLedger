@@ -125,7 +125,7 @@ export function AddSkuDialog({
               </Field>
             </div>
           </FieldGroup>
-          <DialogFooter className="mt-4">
+          <DialogFooter className="mt-4 bg-transparent">
             <Button type="button" variant="ghost" onClick={() => setOpen(false)}>
               Cancel
             </Button>

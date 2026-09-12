@@ -54,6 +54,17 @@ interface LogEntry {
 
 type ViewName = "movement" | "entry" | "receiving" | "unsaleable";
 
+/** Compact "DD/MM/YYYY" rendering of a "YYYY-MM-DD" ledger date, used only for the Stock
+ * movement range heading — every other date display keeps the shared `formatDate` format. */
+function formatDateSlash(d: string | undefined | null): string {
+  if (!d) return "—";
+  const dt = new Date(`${d}T00:00:00`);
+  if (Number.isNaN(dt.getTime())) return d;
+  const day = String(dt.getDate()).padStart(2, "0");
+  const month = String(dt.getMonth() + 1).padStart(2, "0");
+  return `${day}/${month}/${dt.getFullYear()}`;
+}
+
 export function InventoryClient({
   skus,
   salesmen,
@@ -183,8 +194,8 @@ export function InventoryClient({
       {view === "movement" && (
         <div className="rounded-lg border border-border bg-card p-5 shadow-sm">
           <h2 className="mb-3 font-heading text-lg font-semibold">
-            Stock movement — {formatDate(movement.from)}
-            {movement.from !== movement.to ? ` to ${formatDate(movement.to)}` : ""}
+            Stock movement — {formatDateSlash(movement.from)}
+            {movement.from !== movement.to ? `-${formatDateSlash(movement.to)}` : ""}
           </h2>
           <div className="overflow-x-auto rounded-md border">
             <Table>

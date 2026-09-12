@@ -39,7 +39,6 @@ function TableRow({ className, ...props }: React.ComponentProps<typeof MuiTableR
   return (
     <MuiTableRow
       data-slot="table-row"
-      hover
       className={cn("border-b border-border", className)}
       {...props}
     />

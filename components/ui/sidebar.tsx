@@ -4,7 +4,9 @@ import * as React from "react"
 import Drawer from "@mui/material/Drawer"
 import IconButton from "@mui/material/IconButton"
 import Tooltip from "@mui/material/Tooltip"
-import { PanelLeftIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
+import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded"
+import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded"
+import { PanelLeftIcon } from "lucide-react"
 import { cn } from "cn"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { Separator } from "@/components/ui/separator"
@@ -111,7 +113,7 @@ function Sidebar({ className, children }: { className?: string; children?: React
         onClose={() => setOpenMobile(false)}
         slotProps={{
           paper: {
-            className: "flex flex-col bg-sidebar text-sidebar-foreground pt-7.5 pl-3.75",
+            className: "flex flex-col bg-sidebar text-sidebar-foreground pt-3.75 pl-3.75",
             style: { width: SIDEBAR_WIDTH_MOBILE },
           },
         }}
@@ -128,22 +130,28 @@ function Sidebar({ className, children }: { className?: string; children?: React
       data-state={state}
       data-slot="sidebar"
       className={cn(
-        "relative hidden shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-[width] duration-200 ease-linear md:flex",
-        "pt-7.5 pl-3.75",
-        state === "expanded" ? "w-(--sidebar-width)" : "w-(--sidebar-width-icon)",
+        "relative hidden shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-[width] duration-300 ease-in-out md:flex",
+        "pt-3.75",
+        state === "expanded" ? "w-(--sidebar-width) pl-3.75" : "w-(--sidebar-width-icon) pl-0",
         className
       )}
     >
+      <div className={cn("flex shrink-0 items-center pb-1", state === "expanded" ? "justify-end pr-2" : "justify-center")}>
+        <IconButton
+          data-slot="sidebar-rail-trigger"
+          size="small"
+          onClick={toggleSidebar}
+          aria-label="Toggle sidebar"
+          className="rounded-lg text-sidebar-foreground hover:bg-sidebar-accent"
+        >
+          {state === "expanded" ? (
+            <ChevronLeftRoundedIcon fontSize="small" />
+          ) : (
+            <ChevronRightRoundedIcon fontSize="small" />
+          )}
+        </IconButton>
+      </div>
       {children}
-      <IconButton
-        data-slot="sidebar-rail-trigger"
-        size="small"
-        onClick={toggleSidebar}
-        aria-label="Toggle sidebar"
-        className="absolute top-6 -right-3 z-10 size-6! border border-sidebar-border bg-sidebar text-sidebar-foreground shadow-sm hover:bg-sidebar-accent"
-      >
-        {state === "expanded" ? <ChevronLeftIcon className="size-3.5" /> : <ChevronRightIcon className="size-3.5" />}
-      </IconButton>
     </div>
   )
 }
@@ -232,7 +240,7 @@ function SidebarMenuButton({
     "group/menu-button flex w-full items-center gap-2.5 overflow-hidden rounded-lg p-2 text-left text-sm font-medium transition-colors outline-none [&_svg]:size-4 [&_svg]:shrink-0",
     "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
     "focus-visible:ring-2 focus-visible:ring-sidebar-ring",
-    "data-[active=true]:bg-sidebar-active data-[active=true]:font-semibold data-[active=true]:text-sidebar-active-foreground data-[active=true]:shadow-sm",
+    "data-[active=true]:bg-sidebar-active data-[active=true]:font-medium data-[active=true]:text-sidebar-active-foreground data-[active=true]:shadow-sm",
     state === "collapsed" && !isMobile && "justify-center px-0",
     className
   )

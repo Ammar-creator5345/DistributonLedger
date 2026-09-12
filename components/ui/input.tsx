@@ -11,7 +11,9 @@ import { cn } from "cn"
  */
 const StyledInput = styled("input")(({ theme }) => ({
   boxSizing: "border-box",
-  height: 32,
+  height: 45,
+  minHeight: 45,
+  maxHeight: 45,
   width: "100%",
   minWidth: 0,
   borderRadius: "var(--radius-md)",

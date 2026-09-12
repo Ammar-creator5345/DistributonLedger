@@ -84,13 +84,21 @@ function buildTheme(mode: "light" | "dark"): Theme {
               borderWidth: 1.5,
             },
           },
-          // Fixed 32px height on every size="small" outlined field (TextField, Select,
+          // Fixed 45px height on every size="small" outlined field (TextField, Select,
           // DatePicker all render this) so it matches the plain <input> primitive exactly.
-          sizeSmall: { height: 32, boxSizing: "border-box" },
-          input: { paddingTop: 0, paddingBottom: 0, fontSize: "0.875rem", height: "100%", boxSizing: "border-box" },
+          sizeSmall: { height: 45, minHeight: 45, maxHeight: 45, boxSizing: "border-box" },
+          input: {
+            paddingTop: 0,
+            paddingBottom: 0,
+            fontSize: "0.875rem",
+            height: "100%",
+            boxSizing: "border-box",
+            display: "flex",
+            alignItems: "center",
+          },
           // MUI draws the outline via a <fieldset> offset -5px above the root (reserved for a
           // floating label's notch) — since none of our fields use a floating label, that offset
-          // just makes the visible border ~5px taller than the box we sized to 32px. Zeroing it
+          // just makes the visible border ~5px taller than the box we sized to 45px. Zeroing it
           // makes the drawn border match the root exactly, which a height override alone can't fix.
           notchedOutline: { top: 0 },
         },

@@ -46,7 +46,7 @@ export function CashCountPanel({
                     type="number"
                     min={0}
                     step={1}
-                    className="w-24 font-mono"
+                    className="w-16 font-mono"
                     data-denom={den}
                     {...register(`cashCount.d${den}`, { valueAsNumber: true })}
                   />

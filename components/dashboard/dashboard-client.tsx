@@ -342,7 +342,7 @@ function OverviewTab({
           value={topSalesman?.label ?? "—"}
           valueClassName="font-heading text-base"
           sub={topSalesman ? formatMoney(topSalesman.total, currency) : undefined}
-          className="sm:max-w-xs"
+          className="w-full"
         />
       )}
 

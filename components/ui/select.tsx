@@ -153,7 +153,9 @@ function Select({ value, defaultValue, onValueChange, disabled, name, children }
       }}
       className={cn("w-full rounded-lg text-sm", className)}
       sx={{
-        height: 32,
+        height: 45,
+        minHeight: 45,
+        maxHeight: 45,
         boxSizing: "border-box",
         "& .MuiSelect-select": {
           height: "100%",
