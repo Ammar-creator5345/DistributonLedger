@@ -6,6 +6,8 @@ import MuiDialogTitle from "@mui/material/DialogTitle"
 import MuiDialogContent from "@mui/material/DialogContent"
 import MuiDialogContentText from "@mui/material/DialogContentText"
 import MuiDialogActions from "@mui/material/DialogActions"
+import IconButton from "@mui/material/IconButton"
+import CloseIcon from "@mui/icons-material/Close"
 import { Button } from "@/components/ui/button"
 
 /**
@@ -38,15 +40,23 @@ export function ConfirmDialog({
       onClose={() => onOpenChange(false)}
       maxWidth="xs"
       fullWidth
-      slotProps={{ paper: { className: "gap-0 rounded-2xl" } }}
+      slotProps={{ paper: { className: "relative gap-0 rounded-2xl" } }}
     >
-      <MuiDialogTitle className="font-heading! text-base! font-medium!">{title}</MuiDialogTitle>
+      <IconButton
+        size="small"
+        onClick={() => onOpenChange(false)}
+        className="absolute top-2 right-2"
+        aria-label="Close"
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+      <MuiDialogTitle className="font-heading! text-lg! font-bold! pr-8!">{title}</MuiDialogTitle>
       {description && (
         <MuiDialogContent>
           <MuiDialogContentText className="text-sm! text-muted-foreground!">{description}</MuiDialogContentText>
         </MuiDialogContent>
       )}
-      <MuiDialogActions className="gap-2 border-t border-border bg-muted/40 p-4">
+      <MuiDialogActions className="gap-2 bg-muted/40 p-4">
         <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
           {cancelLabel}
         </Button>

@@ -12,6 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Trash2 } from "lucide-react";
+import AddIcon from "@mui/icons-material/Add";
 import type { VoucherInput } from "@/schemas/voucher";
 
 type SectionName = "credits" | "cashReceived" | "expenses" | "other";
@@ -41,7 +42,7 @@ export function DynamicRowsSection({
       <div className="mb-3 flex items-center justify-between gap-2">
         <h2 className="font-heading text-lg font-semibold">{title}</h2>
         <Button type="button" variant="outline" size="sm" onClick={onAddRow}>
-          + Add row
+          <AddIcon fontSize="small" /> Add row
         </Button>
       </div>
       {fields.length === 0 ? (

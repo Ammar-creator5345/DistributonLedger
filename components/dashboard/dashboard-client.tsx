@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { PieChart } from "@mui/x-charts/PieChart";
+import AddIcon from "@mui/icons-material/Add";
 import { toast } from "@/lib/toast";
 import { apiGet } from "@/lib/api-client";
 import { computeLine, unsaleableSaleAmount } from "@/lib/calculations";
@@ -314,7 +315,7 @@ function OverviewTab({
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+      <div className="flex flex-col gap-3 sm:flex-row">
         <StatCard
           label="Sale amount"
           value={formatMoney(saleAmt, currency)}
@@ -325,24 +326,31 @@ function OverviewTab({
               {unsaleableAmt ? ` (incl. ${formatMoney(unsaleableAmt, currency)} Unsaleable)` : ""}
             </>
           }
+          className="flex flex-col justify-center sm:w-2/5"
+          valueClassName="text-2xl"
         />
-        <StatCard label="Profit" value={formatMoney(profit, currency)} />
-        <StatCard label="Expenses" value={formatMoney(expense, currency)} />
-        <StatCard label="Credit given" value={formatMoney(creditGiven, currency)} />
-        <StatCard label="Cash received" value={formatMoney(cashReceived, currency)} />
-        {showTopSalesman && (
-          <StatCard
-            label="Top salesman"
-            value={topSalesman?.label ?? "—"}
-            valueClassName="font-heading text-base"
-            sub={topSalesman ? formatMoney(topSalesman.total, currency) : undefined}
-          />
-        )}
+        <div className="grid grid-cols-2 gap-3 sm:w-3/5">
+          <StatCard label="Profit" value={formatMoney(profit, currency)} />
+          <StatCard label="Expenses" value={formatMoney(expense, currency)} />
+          <StatCard label="Credit given" value={formatMoney(creditGiven, currency)} />
+          <StatCard label="Cash received" value={formatMoney(cashReceived, currency)} />
+        </div>
       </div>
+      {showTopSalesman && (
+        <StatCard
+          label="Top salesman"
+          value={topSalesman?.label ?? "—"}
+          valueClassName="font-heading text-base"
+          sub={topSalesman ? formatMoney(topSalesman.total, currency) : undefined}
+          className="sm:max-w-xs"
+        />
+      )}
 
       <div className="flex flex-wrap gap-2">
         <Button asChild>
-          <Link href="/vouchers/new">+ New voucher</Link>
+          <Link href="/vouchers/new">
+            <AddIcon fontSize="small" /> New voucher
+          </Link>
         </Button>
         <Button variant="outline" asChild>
           <Link href="/reports">View reports</Link>

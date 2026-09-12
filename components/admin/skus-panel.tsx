@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/table";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { Trash2 } from "lucide-react";
+import AddIcon from "@mui/icons-material/Add";
 
 interface SkuRow {
   _id: string;
@@ -118,7 +119,7 @@ export function SkusPanel({ initial }: { initial: SkuRow[] }) {
             }}
           />
           <Button size="sm" onClick={addSku}>
-            + Add SKU
+            <AddIcon fontSize="small" /> Add SKU
           </Button>
         </div>
       </CardHeader>

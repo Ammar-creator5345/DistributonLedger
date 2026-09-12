@@ -111,7 +111,7 @@ function Sidebar({ className, children }: { className?: string; children?: React
         onClose={() => setOpenMobile(false)}
         slotProps={{
           paper: {
-            className: "flex flex-col bg-sidebar text-sidebar-foreground",
+            className: "flex flex-col bg-sidebar text-sidebar-foreground pt-7.5 pl-3.75",
             style: { width: SIDEBAR_WIDTH_MOBILE },
           },
         }}
@@ -129,6 +129,7 @@ function Sidebar({ className, children }: { className?: string; children?: React
       data-slot="sidebar"
       className={cn(
         "relative hidden shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-[width] duration-200 ease-linear md:flex",
+        "pt-7.5 pl-3.75",
         state === "expanded" ? "w-(--sidebar-width)" : "w-(--sidebar-width-icon)",
         className
       )}
