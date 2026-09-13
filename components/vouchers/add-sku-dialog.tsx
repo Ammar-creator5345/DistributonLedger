@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
+import AddIcon from "@mui/icons-material/Add";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "@/lib/toast";
 import { skuSchema, type SkuInput } from "@/schemas/sku";
@@ -61,7 +62,7 @@ export function AddSkuDialog({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button type="button" variant="outline" size="sm">
-          + Add SKU
+          <AddIcon fontSize="small" /> Add SKU
         </Button>
       </DialogTrigger>
       <DialogContent>
@@ -124,7 +125,7 @@ export function AddSkuDialog({
               </Field>
             </div>
           </FieldGroup>
-          <DialogFooter className="mt-4">
+          <DialogFooter className="mt-4 bg-transparent">
             <Button type="button" variant="ghost" onClick={() => setOpen(false)}>
               Cancel
             </Button>

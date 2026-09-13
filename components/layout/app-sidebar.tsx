@@ -56,7 +56,7 @@ function findActiveHref(pathname: string): string | null {
 export function AppSidebar() {
   const pathname = usePathname();
   const activeHref = findActiveHref(pathname);
-  const { state } = useSidebar();
+  const { state, setOpenMobile } = useSidebar();
   const collapsed = state === "collapsed";
 
   return (
@@ -70,7 +70,7 @@ export function AppSidebar() {
                 return (
                   <SidebarMenuItem key={item.href}>
                     <SidebarMenuButton asChild isActive={isActive} tooltip={item.label}>
-                      <Link href={item.href}>
+                      <Link href={item.href} onClick={() => setOpenMobile(false)}>
                         <item.icon />
                         {!collapsed && <span>{item.label}</span>}
                       </Link>

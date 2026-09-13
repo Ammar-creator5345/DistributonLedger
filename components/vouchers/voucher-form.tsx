@@ -334,7 +334,7 @@ export function VoucherForm({
             Opening carries over automatically from the last voucher (plus anything received via
             Inventory).
           </p>
-          <div className="overflow-x-auto rounded-md border">
+          <div className="overflow-x-auto rounded-lg border">
             <Table>
               <TableHeader>
                 <TableRow>

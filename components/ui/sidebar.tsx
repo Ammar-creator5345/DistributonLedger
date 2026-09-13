@@ -4,7 +4,9 @@ import * as React from "react"
 import Drawer from "@mui/material/Drawer"
 import IconButton from "@mui/material/IconButton"
 import Tooltip from "@mui/material/Tooltip"
-import { PanelLeftIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
+import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded"
+import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded"
+import { PanelLeftIcon } from "lucide-react"
 import { cn } from "cn"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { Separator } from "@/components/ui/separator"
@@ -13,7 +15,6 @@ const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
 const SIDEBAR_WIDTH = "16rem"
 const SIDEBAR_WIDTH_ICON = "3.5rem"
-const SIDEBAR_WIDTH_MOBILE = "17rem"
 const SIDEBAR_KEYBOARD_SHORTCUT = "b"
 
 /**
@@ -106,13 +107,13 @@ function Sidebar({ className, children }: { className?: string; children?: React
   if (isMobile) {
     return (
       <Drawer
-        anchor="left"
+        anchor="top"
         open={openMobile}
         onClose={() => setOpenMobile(false)}
         slotProps={{
           paper: {
-            className: "flex flex-col bg-sidebar text-sidebar-foreground",
-            style: { width: SIDEBAR_WIDTH_MOBILE },
+            className: "flex max-h-[85vh] flex-col overflow-y-auto bg-sidebar text-sidebar-foreground pt-3.75 px-3.75",
+            style: { width: "100%" },
           },
         }}
       >
@@ -128,33 +129,46 @@ function Sidebar({ className, children }: { className?: string; children?: React
       data-state={state}
       data-slot="sidebar"
       className={cn(
-        "relative hidden shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-[width] duration-200 ease-linear md:flex",
-        state === "expanded" ? "w-(--sidebar-width)" : "w-(--sidebar-width-icon)",
+        "relative z-10 hidden shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-[width] duration-300 ease-in-out md:flex",
+        "pt-14",
+        state === "expanded" ? "w-(--sidebar-width) pl-3.75" : "w-(--sidebar-width-icon) pl-0",
         className
       )}
     >
+      <div className={cn("absolute z-20 flex top-4 border -right-4 rounded-full w-fit shrink-0 items-center bg-card", state === "expanded" ? "justify-end" : "justify-center")}>
+        <IconButton
+          data-slot="sidebar-rail-trigger"
+          size="small"
+          onClick={toggleSidebar}
+          aria-label="Toggle sidebar"
+          className="rounded-md text-sidebar-foreground hover:bg-sidebar-accent"
+        >
+          {state === "expanded" ? (
+            <ChevronLeftRoundedIcon fontSize="small" />
+          ) : (
+            <ChevronRightRoundedIcon fontSize="small" />
+          )}
+        </IconButton>
+      </div>
       {children}
-      <IconButton
-        data-slot="sidebar-rail-trigger"
-        size="small"
-        onClick={toggleSidebar}
-        aria-label="Toggle sidebar"
-        className="absolute top-6 -right-3 z-10 size-6! border border-sidebar-border bg-sidebar text-sidebar-foreground shadow-sm hover:bg-sidebar-accent"
-      >
-        {state === "expanded" ? <ChevronLeftIcon className="size-3.5" /> : <ChevronRightIcon className="size-3.5" />}
-      </IconButton>
     </div>
   )
 }
 
 function SidebarTrigger({ className }: { className?: string }) {
-  const { toggleSidebar } = useSidebar()
+  const { toggleSidebar, isMobile } = useSidebar()
+  // Desktop already has its own rail-trigger on the persistent sidebar; this one is only for
+  // opening the mobile drawer. Not rendering it here (rather than hiding it with a `md:hidden`
+  // class) sidesteps a real bug: MUI's own base `display` style on IconButton wins over a
+  // Tailwind `md:hidden` class in this app's cascade, so the CSS-hide approach silently failed
+  // and the button stayed visible on desktop — verified against a real rendered page.
+  if (!isMobile) return null
   return (
     <IconButton
       data-slot="sidebar-trigger"
       size="small"
       onClick={toggleSidebar}
-      className={cn("rounded-lg", className)}
+      className={cn("rounded-md", className)}
       aria-label="Toggle sidebar"
     >
       <PanelLeftIcon className="size-4" />
@@ -228,10 +242,10 @@ function SidebarMenuButton({
   void asChild
 
   const classes = cn(
-    "group/menu-button flex w-full items-center gap-2.5 overflow-hidden rounded-lg p-2 text-left text-sm font-medium transition-colors outline-none [&_svg]:size-4 [&_svg]:shrink-0",
+    "group/menu-button flex w-full items-center gap-2.5 overflow-hidden rounded-md p-2 text-left text-sm font-medium transition-colors outline-none [&_svg]:size-4 [&_svg]:shrink-0",
     "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
     "focus-visible:ring-2 focus-visible:ring-sidebar-ring",
-    "data-[active=true]:bg-sidebar-active data-[active=true]:font-semibold data-[active=true]:text-sidebar-active-foreground data-[active=true]:shadow-sm",
+    "data-[active=true]:bg-sidebar-active data-[active=true]:font-medium data-[active=true]:text-sidebar-active-foreground data-[active=true]:shadow-sm",
     state === "collapsed" && !isMobile && "justify-center px-0",
     className
   )

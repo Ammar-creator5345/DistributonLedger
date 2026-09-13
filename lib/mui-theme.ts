@@ -37,7 +37,7 @@ function buildTheme(mode: "light" | "dark"): Theme {
         success: { main: "#2c6b3f" },
         warning: { main: "#d6a952" },
         text: { primary: "#1c2a22", secondary: "#75705f" },
-        divider: "#dcd6c3",
+        divider: "#eeeeee",
       };
 
   return createTheme({
@@ -84,15 +84,30 @@ function buildTheme(mode: "light" | "dark"): Theme {
               borderWidth: 1.5,
             },
           },
-          // Fixed 32px height on every size="small" outlined field (TextField, Select,
+          // Fixed 45px height on every size="small" outlined field (TextField, Select,
           // DatePicker all render this) so it matches the plain <input> primitive exactly.
-          sizeSmall: { height: 32, boxSizing: "border-box" },
-          input: { paddingTop: 0, paddingBottom: 0, fontSize: "0.875rem", height: "100%", boxSizing: "border-box" },
+          sizeSmall: { height: 45, minHeight: 45, maxHeight: 45, boxSizing: "border-box" },
+          input: {
+            paddingTop: 0,
+            paddingBottom: 0,
+            fontSize: "0.875rem",
+            height: "100%",
+            boxSizing: "border-box",
+            display: "flex",
+            alignItems: "center",
+          },
           // MUI draws the outline via a <fieldset> offset -5px above the root (reserved for a
           // floating label's notch) — since none of our fields use a floating label, that offset
-          // just makes the visible border ~5px taller than the box we sized to 32px. Zeroing it
+          // just makes the visible border ~5px taller than the box we sized to 45px. Zeroing it
           // makes the drawn border match the root exactly, which a height override alone can't fix.
-          notchedOutline: { top: 0 },
+          // The fieldset's <legend> child is the other half of this: even with top pinned to 0,
+          // browsers reserve vertical space around the border for the legend's own height (11px
+          // by default, used for the floating-label notch), which visibly pushes the painted
+          // border down a few px regardless of the fieldset's actual box position — verified
+          // against a real rendered page (a Select's border started ~5px lower than a plain
+          // Input's despite both boxes measuring the same 45px via getBoundingClientRect).
+          // Hiding the legend removes that reservation entirely.
+          notchedOutline: { top: 0, "& legend": { display: "none" } },
         },
       },
       MuiSelect: {
@@ -113,11 +128,11 @@ function buildTheme(mode: "light" | "dark"): Theme {
       MuiMenu: {
         styleOverrides: {
           paper: {
-            borderRadius: radius + 2,
+            borderRadius: radius,
             border: `1px solid ${palette.divider}`,
             boxShadow: isDark
               ? "0 12px 32px rgba(0,0,0,0.45)"
-              : "0 12px 32px rgba(28,42,34,0.12)",
+              : "0 8px 24px rgba(0, 0, 0, 0.10)",
           },
           list: { paddingTop: 0, paddingBottom: 0 },
         },
@@ -125,19 +140,22 @@ function buildTheme(mode: "light" | "dark"): Theme {
       MuiPopover: {
         styleOverrides: {
           paper: {
-            borderRadius: radius + 2,
+            borderRadius: radius,
             border: `1px solid ${palette.divider}`,
             boxShadow: isDark
               ? "0 12px 32px rgba(0,0,0,0.45)"
-              : "0 12px 32px rgba(28,42,34,0.12)",
+              : "0 8px 24px rgba(0, 0, 0, 0.10)",
           },
         },
       },
       MuiDialog: {
         styleOverrides: {
           paper: {
-            borderRadius: radius * 2,
+            borderRadius: 14,
             border: `1px solid ${palette.divider}`,
+            boxShadow: isDark
+              ? "0 12px 32px rgba(0,0,0,0.45)"
+              : "0 8px 24px rgba(0, 0, 0, 0.10)",
           },
         },
       },

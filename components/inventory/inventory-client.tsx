@@ -144,19 +144,19 @@ export function InventoryClient({
         description="Overall warehouse stock — opening, received, sale, damage, unsaleable and closing."
       />
 
-      <div className="flex flex-wrap items-end gap-3 rounded-lg border border-border bg-card p-4 shadow-sm">
+      <div className="grid grid-cols-1 gap-3 rounded-lg border border-border bg-card p-4 shadow-sm sm:grid-cols-3">
         <div>
           <label className="mb-1.5 block text-xs font-medium text-muted-foreground">From</label>
-          <DatePicker value={from} onChange={(v) => handleFilterChange({ from: v })} className="w-[160px]" />
+          <DatePicker value={from} onChange={(v) => handleFilterChange({ from: v })} className="w-full" />
         </div>
         <div>
           <label className="mb-1.5 block text-xs font-medium text-muted-foreground">To</label>
-          <DatePicker value={to} onChange={(v) => handleFilterChange({ to: v })} className="w-[160px]" />
+          <DatePicker value={to} onChange={(v) => handleFilterChange({ to: v })} className="w-full" />
         </div>
         <div>
           <label className="mb-1.5 block text-xs font-medium text-muted-foreground">SKU</label>
           <Select value={skuId || "all"} onValueChange={(v) => handleFilterChange({ skuId: v === "all" ? "" : v })}>
-            <SelectTrigger className="w-[220px]">
+            <SelectTrigger className="w-full">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -182,11 +182,8 @@ export function InventoryClient({
 
       {view === "movement" && (
         <div className="rounded-lg border border-border bg-card p-5 shadow-sm">
-          <h2 className="mb-3 font-heading text-lg font-semibold">
-            Stock movement — {formatDate(movement.from)}
-            {movement.from !== movement.to ? ` to ${formatDate(movement.to)}` : ""}
-          </h2>
-          <div className="overflow-x-auto rounded-md border">
+          <h2 className="mb-3 font-heading text-lg font-semibold">Stock movement</h2>
+          <div className="overflow-x-auto rounded-lg border">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -237,7 +234,7 @@ export function InventoryClient({
           <h2 className="mb-3 font-heading text-lg font-semibold">
             {view === "receiving" ? "Warehouse receiving log" : "Unsaleable stock log"}
           </h2>
-          <div className="overflow-x-auto rounded-md border">
+          <div className="overflow-x-auto rounded-lg border">
             <Table>
               <TableHeader>
                 <TableRow>

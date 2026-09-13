@@ -3,7 +3,7 @@
 import * as React from "react"
 import MuiDialog from "@mui/material/Dialog"
 import IconButton from "@mui/material/IconButton"
-import { XIcon } from "lucide-react"
+import CloseIcon from "@mui/icons-material/Close"
 import { cn } from "cn"
 
 interface DialogContextValue {
@@ -91,10 +91,14 @@ function DialogContent({
         <IconButton
           size="small"
           onClick={() => onOpenChange(false)}
-          className="absolute top-2 right-2"
+          // MUI's ButtonBase hardcodes `position: relative` in its own base styles (for the
+          // ripple effect), which wins over a Tailwind `absolute` class regardless of
+          // specificity in this app's SSR setup — sx generates a style MUI's own cascade
+          // respects, so the override actually takes effect here.
+          sx={{ position: "absolute", top: 8, right: 8 }}
           aria-label="Close"
         >
-          <XIcon className="size-4" />
+          <CloseIcon fontSize="small" />
         </IconButton>
       )}
     </MuiDialog>
@@ -109,14 +113,14 @@ function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="dialog-footer"
-      className={cn("-mx-5 -mb-5 flex flex-col-reverse gap-2 rounded-b-2xl border-t border-border bg-muted/40 p-4 sm:flex-row sm:justify-end", className)}
+      className={cn("-mx-5 -mb-5 flex flex-col-reverse gap-2 rounded-b-2xl bg-muted/40 p-4 sm:flex-row sm:justify-end", className)}
       {...props}
     />
   )
 }
 
 function DialogTitle({ className, ...props }: React.ComponentProps<"h2">) {
-  return <h2 data-slot="dialog-title" className={cn("font-heading text-base leading-none font-medium", className)} {...props} />
+  return <h2 data-slot="dialog-title" className={cn("font-heading text-lg leading-none font-bold", className)} {...props} />
 }
 
 function DialogDescription({ className, ...props }: React.ComponentProps<"p">) {

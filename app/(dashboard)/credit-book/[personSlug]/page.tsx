@@ -61,7 +61,7 @@ export default async function CreditBookPersonPage({
 
       <div className="rounded-lg border bg-card p-5">
         <h2 className="mb-3 font-heading text-lg font-semibold">Transaction history</h2>
-        <div className="overflow-x-auto rounded-md border">
+        <div className="overflow-x-auto rounded-lg border">
           <Table>
             <TableHeader>
               <TableRow>

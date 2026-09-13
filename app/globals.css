@@ -7,9 +7,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-plex-sans);
-  --font-mono: var(--font-plex-mono);
-  --font-heading: var(--font-source-serif);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-inter);
+  --font-heading: var(--font-inter);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -46,13 +46,20 @@
   --color-negative: var(--negative);
   --color-gold: var(--gold);
   --color-gold-2: var(--gold-2);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
+  /*
+    Fixed pixel tiers (not proportional to --radius) so each maps to one specific role:
+    sm = chips/badges (6px), md = inputs/buttons (8px), lg/xl = cards/sections/tables (12px),
+    2xl = modals (14px). 3xl/4xl are unused in the app; left proportional.
+  */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 0.875rem;
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  /* Subtle card shadow, matching the shared shadow-sm utility used across the app. */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 /*
@@ -77,9 +84,9 @@
   --accent: #fbf3e3;
   --accent-foreground: #1f3a28;
   --destructive: #a13d3d;
-  --border: #dcd6c3;
+  --border: #eeeeee;
   --border-soft: #e8e3d3;
-  --input: #dcd6c3;
+  --input: #eeeeee;
   --ring: #b8863b;
   --positive: #2c6b3f;
   --negative: #a13d3d;
@@ -180,16 +187,16 @@
 
 /*
   Force every field control (plain <Input>, MUI Select, MUI DatePicker) to the exact same
-  32px height. Deliberately plain CSS with !important, outside the MUI theme's JS
+  45px height. Deliberately plain CSS with !important, outside the MUI theme's JS
   styleOverrides mechanism, targeting MUI's stable cross-version class names directly — this
   cannot be beaten by MUI's own runtime-injected emotion styles regardless of insertion order,
   so it doesn't depend on getting the theme object's internal wiring exactly right.
 */
 [data-slot="input"],
 .MuiInputBase-root {
-  height: 32px !important;
-  min-height: 32px !important;
-  max-height: 32px !important;
+  height: 45px !important;
+  min-height: 45px !important;
+  max-height: 45px !important;
   box-sizing: border-box !important;
 }
 .MuiInputBase-root .MuiOutlinedInput-notchedOutline {
@@ -204,6 +211,49 @@
   box-sizing: border-box !important;
   display: flex !important;
   align-items: center !important;
+}
+
+/*
+  Row height for every table's body/footer cells: 48px, matching the Vouchers table (its own
+  height comes naturally from its 32px icon-button actions column + padding — this just makes
+  every other table match it exactly). Deliberately `height`, not `min-height` — verified
+  against a real rendered page that Chrome's table row-sizing algorithm silently ignores
+  `min-height` on a <td> (computed style reports it correctly, but it has zero effect on the
+  actual box), while `height` is respected and still lets a cell grow taller than 48px when its
+  own content needs more room (e.g. the 45px input fields elsewhere). Also needs !important,
+  same reason as the input-height rule above: a plain Tailwind utility class on <td> lost to
+  MUI's own emotion-injected TableCell styles despite having higher CSS specificity on paper.
+*/
+.MuiTableCell-root {
+  height: 48px !important;
+}
+
+/*
+  Custom scrollbar, applied everywhere content scrolls (page body, sidebar nav, dialogs,
+  table overflow containers) instead of the browser default. Colors are drawn from the
+  existing --border / --muted-foreground tokens so it matches the theme in both light and
+  dark mode without introducing a new color. `scrollbar-width`/`scrollbar-color` cover
+  Firefox; the `::-webkit-scrollbar*` rules cover Chromium/Safari.
+*/
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--border);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--muted-foreground);
 }
 
 @media print {

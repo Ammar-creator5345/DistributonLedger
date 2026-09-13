@@ -28,7 +28,7 @@ export function CashCountPanel({
   return (
     <div>
       <h2 className="mb-3 font-heading text-lg font-semibold">Cash counting</h2>
-      <div className="overflow-x-auto rounded-md border">
+      <div className="overflow-x-auto rounded-lg border">
         <Table>
           <TableHeader>
             <TableRow>
@@ -46,7 +46,7 @@ export function CashCountPanel({
                     type="number"
                     min={0}
                     step={1}
-                    className="w-24 font-mono"
+                    className="w-16 font-mono"
                     data-denom={den}
                     {...register(`cashCount.d${den}`, { valueAsNumber: true })}
                   />

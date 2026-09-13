@@ -66,7 +66,7 @@ export function OthersClient({
         description='All "Other" transactions entered on vouchers, shown here separately for a clear, dedicated view.'
       />
 
-      <div className="flex flex-wrap items-end gap-3 rounded-lg border border-border bg-card p-4 shadow-sm">
+      <div className="grid grid-cols-1 gap-3 rounded-lg border border-border bg-card p-4 shadow-sm sm:grid-cols-3">
         <div>
           <label className="mb-1.5 block text-xs font-medium text-muted-foreground">From</label>
           <DatePicker
@@ -75,7 +75,7 @@ export function OthersClient({
               setFrom(v);
               refetch({ from: v, to, salesmanId });
             }}
-            className="w-[160px]"
+            className="w-full"
           />
         </div>
         <div>
@@ -86,7 +86,7 @@ export function OthersClient({
               setTo(v);
               refetch({ from, to: v, salesmanId });
             }}
-            className="w-[160px]"
+            className="w-full"
           />
         </div>
         <div>
@@ -99,7 +99,7 @@ export function OthersClient({
               refetch({ from, to, salesmanId: next });
             }}
           >
-            <SelectTrigger className="w-[200px]">
+            <SelectTrigger className="w-full">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -116,7 +116,7 @@ export function OthersClient({
 
       <div className="rounded-lg border border-border bg-card p-5 shadow-sm">
         <h2 className="mb-3 font-heading text-lg font-semibold">Others log</h2>
-        <div className="overflow-x-auto rounded-md border">
+        <div className="overflow-x-auto rounded-lg border">
           <Table>
             <TableHeader>
               <TableRow>

@@ -43,7 +43,7 @@ export function OpeningStockPanel({
           forward automatically — this table only matters for a brand-new SKU or your initial
           setup.
         </p>
-        <div className="overflow-x-auto rounded-md border">
+        <div className="overflow-x-auto rounded-lg border">
           <Table>
             <TableHeader>
               <TableRow>

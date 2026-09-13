@@ -64,7 +64,7 @@ export function CreditBookClient({
         description="Person-wise credit given, receiving/payment, and remaining balance. Salesman Cash and MCB are never included here."
       />
 
-      <div className="flex flex-wrap items-end gap-3 rounded-lg border border-border bg-card p-4 shadow-sm">
+      <div className="grid grid-cols-1 gap-3 rounded-lg border border-border bg-card p-4 shadow-sm sm:grid-cols-2">
         <div>
           <label className="mb-1.5 block text-xs font-medium text-muted-foreground">From Date</label>
           <DatePicker
@@ -73,7 +73,7 @@ export function CreditBookClient({
               setFrom(v);
               refetch({ from: v, to });
             }}
-            className="w-[160px]"
+            className="w-full"
           />
         </div>
         <div>
@@ -84,14 +84,14 @@ export function CreditBookClient({
               setTo(v);
               refetch({ from, to: v });
             }}
-            className="w-[160px]"
+            className="w-full"
           />
         </div>
       </div>
 
       <div className="rounded-lg border border-border bg-card p-5 shadow-sm">
         <h2 className="mb-3 font-heading text-lg font-semibold">All persons</h2>
-        <div className="overflow-x-auto rounded-md border">
+        <div className="overflow-x-auto rounded-lg border">
           <Table>
             <TableHeader>
               <TableRow>

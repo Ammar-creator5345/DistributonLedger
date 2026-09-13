@@ -44,7 +44,6 @@ export default async function DashboardPage() {
 
   return (
     <DashboardClient
-      businessName={settings.businessName}
       currency={settings.currency}
       salesmen={JSON.parse(JSON.stringify(salesmen)).map((s: { _id: string; name: string }) => ({
         _id: s._id,

@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/table";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { Trash2 } from "lucide-react";
+import AddIcon from "@mui/icons-material/Add";
 
 interface SalesmanRow {
   _id: string;
@@ -107,12 +108,12 @@ export function SalesmenPanel({ initial }: { initial: SalesmanRow[] }) {
             }}
           />
           <Button size="sm" onClick={addSalesman}>
-            + Add salesman
+            <AddIcon fontSize="small" /> Add salesman
           </Button>
         </div>
       </CardHeader>
       <CardContent>
-        <div className="overflow-x-auto rounded-md border">
+        <div className="overflow-x-auto rounded-lg border">
           <Table>
             <TableHeader>
               <TableRow>

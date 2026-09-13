@@ -11,7 +11,9 @@ import { cn } from "cn"
  */
 const StyledInput = styled("input")(({ theme }) => ({
   boxSizing: "border-box",
-  height: 32,
+  height: 45,
+  minHeight: 45,
+  maxHeight: 45,
   width: "100%",
   minWidth: 0,
   borderRadius: "var(--radius-md)",
@@ -27,7 +29,6 @@ const StyledInput = styled("input")(({ theme }) => ({
   "&:hover:not(:disabled)": { borderColor: alpha(theme.palette.secondary.main, 0.6) },
   "&:focus-visible": {
     borderColor: theme.palette.secondary.main,
-    boxShadow: `0 0 0 3px ${alpha(theme.palette.secondary.main, 0.2)}`,
   },
   "&:disabled": {
     pointerEvents: "none",

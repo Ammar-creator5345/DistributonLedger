@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/table";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { Pencil, Printer, Trash2 } from "lucide-react";
+import AddIcon from "@mui/icons-material/Add";
 import type { SkuLike } from "@/types";
 
 interface VoucherRow {
@@ -156,12 +157,14 @@ export function VouchersTable({
         </div>
         <div className="ml-auto">
           <Button asChild>
-            <Link href="/vouchers/new">+ New voucher</Link>
+            <Link href="/vouchers/new">
+              <AddIcon fontSize="small" /> New voucher
+            </Link>
           </Button>
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-md border">
+      <div className="overflow-x-auto rounded-lg border bg-card">
         <Table>
           <TableHeader>
             <TableRow>
