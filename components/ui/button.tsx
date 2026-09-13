@@ -53,6 +53,10 @@ function Button({
   const muiColor = variant === "ghost" || variant === "link" ? "inherit" : toMuiColor(variant)
 
   const commonSx = {
+    // Exact height, not just a minimum — MUI's own vertical padding/line-height can otherwise
+    // push a button's natural height above this, so it visibly mismatches a plain Tailwind
+    // element (e.g. buttonVariants()'d <a>) pinned to the same size sitting next to it.
+    height,
     minHeight: height,
     borderRadius: "var(--radius-md)",
     ...(variant === "ghost" || variant === "link"

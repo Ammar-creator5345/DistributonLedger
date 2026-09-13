@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldLabel } from "@/components/ui/field";
-import { ShieldCheck } from "lucide-react";
+import { Lock, Eye, EyeOff } from "lucide-react";
 
 /**
  * Secondary Admin-panel gate matching the source app's UI.adminUnlocked flow (default password
@@ -19,6 +19,7 @@ export function AdminGate({ children }: { children: ReactNode }) {
   const [unlocked, setUnlocked] = useState(false);
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   async function handleUnlock(e: React.FormEvent) {
     e.preventDefault();
@@ -37,27 +38,39 @@ export function AdminGate({ children }: { children: ReactNode }) {
   if (unlocked) return <>{children}</>;
 
   return (
-    <div className="mx-auto flex max-w-sm flex-col items-center gap-4 py-12">
-      <div className="flex size-12 items-center justify-center rounded-full bg-secondary text-primary">
-        <ShieldCheck className="size-6" />
-      </div>
-      <Card className="w-full">
-        <CardHeader className="text-center">
+    <div className="mx-auto flex max-w-sm flex-col py-12">
+      <Card className="w-full py-8">
+        <CardHeader className="items-center gap-3 px-8 text-center">
+          <div className="mx-auto mb-1 flex size-12 items-center justify-center rounded-full bg-secondary text-primary">
+            <Lock className="size-6" />
+          </div>
           <CardTitle className="font-heading text-xl">Admin</CardTitle>
-          <CardDescription>Enter the admin password to continue.</CardDescription>
+          <CardDescription>Authorized access only.</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="px-8">
           <form onSubmit={handleUnlock} className="flex flex-col gap-4">
             <Field>
               <FieldLabel htmlFor="adminPasswordInput">Password</FieldLabel>
-              <Input
-                id="adminPasswordInput"
-                type="password"
-                placeholder="Admin password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                autoFocus
-              />
+              <div className="relative">
+                <Input
+                  id="adminPasswordInput"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter password..."
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoFocus
+                  className="pr-10"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((v) => !v)}
+                  className="absolute inset-y-0 right-2 flex items-center text-muted-foreground hover:text-foreground"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  tabIndex={-1}
+                >
+                  {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                </button>
+              </div>
             </Field>
             <Button type="submit" disabled={submitting || !password}>
               {submitting ? "Checking…" : "Unlock"}
