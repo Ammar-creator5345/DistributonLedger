@@ -1,15 +1,31 @@
 "use client";
 
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "@/lib/toast";
 import { settingsSchema, type SettingsInput } from "@/schemas/settings";
 import { apiPatch } from "@/lib/api-client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
+
+const CURRENCY_OPTIONS = [
+  { value: "Rs", label: "Rs — Pakistani Rupee" },
+  { value: "$", label: "$ — US Dollar" },
+  { value: "€", label: "€ — Euro" },
+  { value: "£", label: "£ — British Pound" },
+  { value: "₹", label: "₹ — Indian Rupee" },
+  { value: "AED", label: "AED — UAE Dirham" },
+];
 
 export function SettingsPanel({ initial }: { initial: SettingsInput }) {
   const [submitting, setSubmitting] = useState(false);
@@ -17,6 +33,7 @@ export function SettingsPanel({ initial }: { initial: SettingsInput }) {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<SettingsInput>({
     resolver: zodResolver(settingsSchema),
@@ -60,7 +77,24 @@ export function SettingsPanel({ initial }: { initial: SettingsInput }) {
               </Field>
               <Field data-invalid={!!errors.currency}>
                 <FieldLabel htmlFor="currency">Currency symbol</FieldLabel>
-                <Input id="currency" className="max-w-[140px]" {...register("currency")} />
+                <Controller
+                  control={control}
+                  name="currency"
+                  render={({ field }) => (
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <SelectTrigger id="currency" className="max-w-55">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {CURRENCY_OPTIONS.map((opt) => (
+                          <SelectItem key={opt.value} value={opt.value}>
+                            {opt.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
                 <FieldError errors={[errors.currency]} />
               </Field>
               <Field>
