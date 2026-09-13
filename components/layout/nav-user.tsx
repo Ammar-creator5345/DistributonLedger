@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { LogOut, User } from "lucide-react";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { toast } from "@/lib/toast";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import {
@@ -15,8 +17,16 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export function NavUser({ email }: { email: string }) {
+  const router = useRouter();
   const initial = email.charAt(0).toUpperCase();
   const [confirmSignOut, setConfirmSignOut] = useState(false);
+
+  async function handleSignOut() {
+    await signOut({ redirect: false });
+    toast.success("Signed out successfully.");
+    router.push("/login");
+    router.refresh();
+  }
 
   return (
     <>
@@ -49,7 +59,7 @@ export function NavUser({ email }: { email: string }) {
         description="You'll need to sign in again to continue."
         confirmLabel="Sign out"
         destructive={false}
-        onConfirm={() => signOut({ callbackUrl: "/login" })}
+        onConfirm={handleSignOut}
       />
     </>
   );

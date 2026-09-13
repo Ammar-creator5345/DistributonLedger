@@ -35,8 +35,8 @@ export const toast = {
   warning: (message: string) => emit(message, "warning"),
 };
 
-function SlideUp(props: SlideProps) {
-  return <Slide {...props} direction="up" />;
+function SlideDown(props: SlideProps) {
+  return <Slide {...props} direction="down" />;
 }
 
 export function ToastProvider({ children }: { children: React.ReactNode }) {
@@ -70,9 +70,9 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
           open
           autoHideDuration={3200}
           onClose={() => handleClose(t.id)}
-          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-          slots={{ transition: SlideUp }}
-          sx={{ bottom: `${16 + index * 62}px !important` }}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          slots={{ transition: SlideDown }}
+          sx={{ top: `${16 + index * 62}px !important` }}
         >
           <Alert
             onClose={() => handleClose(t.id)}
