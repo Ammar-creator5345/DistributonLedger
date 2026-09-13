@@ -155,19 +155,19 @@ export function InventoryClient({
         description="Overall warehouse stock — opening, received, sale, damage, unsaleable and closing."
       />
 
-      <div className="flex flex-wrap items-end gap-3 rounded-lg border border-border bg-card p-4 shadow-sm">
+      <div className="grid grid-cols-1 gap-3 rounded-lg border border-border bg-card p-4 shadow-sm sm:grid-cols-3">
         <div>
           <label className="mb-1.5 block text-xs font-medium text-muted-foreground">From</label>
-          <DatePicker value={from} onChange={(v) => handleFilterChange({ from: v })} className="w-[160px]" />
+          <DatePicker value={from} onChange={(v) => handleFilterChange({ from: v })} className="w-full" />
         </div>
         <div>
           <label className="mb-1.5 block text-xs font-medium text-muted-foreground">To</label>
-          <DatePicker value={to} onChange={(v) => handleFilterChange({ to: v })} className="w-[160px]" />
+          <DatePicker value={to} onChange={(v) => handleFilterChange({ to: v })} className="w-full" />
         </div>
         <div>
           <label className="mb-1.5 block text-xs font-medium text-muted-foreground">SKU</label>
           <Select value={skuId || "all"} onValueChange={(v) => handleFilterChange({ skuId: v === "all" ? "" : v })}>
-            <SelectTrigger className="w-[220px]">
+            <SelectTrigger className="w-full">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>

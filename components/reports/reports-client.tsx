@@ -168,19 +168,19 @@ export function ReportsClient({
     <div className="flex flex-col gap-4">
       <PageHeader title="Reports" description="Sales, revenue, profit, expenses and cash — computed live from your vouchers." />
 
-      <div className="flex flex-wrap items-end gap-3 rounded-lg border border-border bg-card p-4 shadow-sm">
+      <div className="grid grid-cols-1 gap-3 rounded-lg border border-border bg-card p-4 shadow-sm sm:grid-cols-3">
         <div>
           <label className="mb-1.5 block text-xs font-medium text-muted-foreground">From</label>
-          <DatePicker value={from} onChange={(v) => update({ from: v })} className="w-[160px]" />
+          <DatePicker value={from} onChange={(v) => update({ from: v })} className="w-full" />
         </div>
         <div>
           <label className="mb-1.5 block text-xs font-medium text-muted-foreground">To</label>
-          <DatePicker value={to} onChange={(v) => update({ to: v })} className="w-[160px]" />
+          <DatePicker value={to} onChange={(v) => update({ to: v })} className="w-full" />
         </div>
         <div>
           <label className="mb-1.5 block text-xs font-medium text-muted-foreground">Salesman</label>
           <Select value={salesmanId || "all"} onValueChange={(v) => update({ salesmanId: v === "all" ? "" : v })}>
-            <SelectTrigger className="w-[200px]">
+            <SelectTrigger className="w-full">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
