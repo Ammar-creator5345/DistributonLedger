@@ -15,7 +15,6 @@ const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
 const SIDEBAR_WIDTH = "16rem"
 const SIDEBAR_WIDTH_ICON = "3.5rem"
-const SIDEBAR_WIDTH_MOBILE = "17rem"
 const SIDEBAR_KEYBOARD_SHORTCUT = "b"
 
 /**
@@ -108,13 +107,13 @@ function Sidebar({ className, children }: { className?: string; children?: React
   if (isMobile) {
     return (
       <Drawer
-        anchor="left"
+        anchor="top"
         open={openMobile}
         onClose={() => setOpenMobile(false)}
         slotProps={{
           paper: {
-            className: "flex flex-col bg-sidebar text-sidebar-foreground pt-3.75 pl-3.75",
-            style: { width: SIDEBAR_WIDTH_MOBILE },
+            className: "flex max-h-[85vh] flex-col overflow-y-auto bg-sidebar text-sidebar-foreground pt-3.75 px-3.75",
+            style: { width: "100%" },
           },
         }}
       >
@@ -157,7 +156,13 @@ function Sidebar({ className, children }: { className?: string; children?: React
 }
 
 function SidebarTrigger({ className }: { className?: string }) {
-  const { toggleSidebar } = useSidebar()
+  const { toggleSidebar, isMobile } = useSidebar()
+  // Desktop already has its own rail-trigger on the persistent sidebar; this one is only for
+  // opening the mobile drawer. Not rendering it here (rather than hiding it with a `md:hidden`
+  // class) sidesteps a real bug: MUI's own base `display` style on IconButton wins over a
+  // Tailwind `md:hidden` class in this app's cascade, so the CSS-hide approach silently failed
+  // and the button stayed visible on desktop — verified against a real rendered page.
+  if (!isMobile) return null
   return (
     <IconButton
       data-slot="sidebar-trigger"

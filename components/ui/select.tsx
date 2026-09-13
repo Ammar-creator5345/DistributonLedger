@@ -148,8 +148,8 @@ function Select({ value, defaultValue, onValueChange, disabled, name, children }
       IconComponent={KeyboardArrowDownRoundedIcon}
       renderValue={(v) => {
         const selected = v as string
-        if (!selected) return <span className="text-muted-foreground">{placeholder}</span>
-        return labelMap.get(selected) ?? selected
+        if (!selected) return <span className="block truncate text-muted-foreground">{placeholder}</span>
+        return <span className="block truncate">{labelMap.get(selected) ?? selected}</span>
       }}
       className={cn("w-full rounded-md text-sm", className)}
       sx={{
@@ -162,6 +162,7 @@ function Select({ value, defaultValue, onValueChange, disabled, name, children }
           boxSizing: "border-box",
           display: "flex",
           alignItems: "center",
+          minWidth: 0,
         },
       }}
       MenuProps={{ slotProps: { paper: { className: "max-h-72" } } }}
