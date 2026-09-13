@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
-import { getSettings } from "@/lib/settings";
 import { LoginForm } from "@/components/auth/login-form";
+import { BrandLogo } from "@/components/layout/brand-logo";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const metadata: Metadata = {
@@ -19,16 +19,16 @@ export default async function LoginPage({
     redirect("/dashboard");
   }
 
-  const settings = await getSettings();
   const { callbackUrl } = await searchParams;
 
   return (
-    <Card className="w-full max-w-sm">
-      <CardHeader>
-        <CardTitle className="font-heading text-xl">{settings.businessName}</CardTitle>
-        <CardDescription>Sign in to your ledger.</CardDescription>
+    <Card className="w-full max-w-sm py-8">
+      <CardHeader className="items-center gap-3 px-8 text-center">
+        <BrandLogo className="mx-auto h-12 w-auto" />
+        <CardTitle className="font-heading text-xl">Welcome back</CardTitle>
+        <CardDescription>Enter your details to continue.</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-8">
         <LoginForm callbackUrl={callbackUrl} />
       </CardContent>
     </Card>
