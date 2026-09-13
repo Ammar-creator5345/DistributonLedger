@@ -151,6 +151,55 @@
   --sidebar-ring: #d6a952;
 }
 
+/*
+  Forces everything inside it to render with the light palette regardless of the app-wide
+  `.dark` class on <html> — used to pin the sign-in page to light mode only. A closer,
+  directly-matched declaration always wins over an inherited one from a further-away ancestor
+  (here, `.dark` on <html>), so no !important is needed; descendants that don't set these
+  themselves just inherit the light values from this element instead of from .dark.
+*/
+.theme-light {
+  color-scheme: light;
+  --background: #f7f6f2;
+  --foreground: #1c2a22;
+  --card: #ffffff;
+  --card-foreground: #1c2a22;
+  --popover: #ffffff;
+  --popover-foreground: #1c2a22;
+  --primary: #1f3a28;
+  --primary-foreground: #f5f2e6;
+  --secondary: #fbf3e3;
+  --secondary-foreground: #1f3a28;
+  --muted: #e8e3d3;
+  --muted-foreground: #75705f;
+  --accent: #fbf3e3;
+  --accent-foreground: #1f3a28;
+  --destructive: #a13d3d;
+  --border: #eeeeee;
+  --border-soft: #e8e3d3;
+  --input: #eeeeee;
+  --ring: #b8863b;
+  --positive: #2c6b3f;
+  --negative: #a13d3d;
+  --gold: #b8863b;
+  --gold-2: #d6a952;
+  --chart-1: #1f3a28;
+  --chart-2: #b8863b;
+  --chart-3: #3c6b49;
+  --chart-4: #75705f;
+  --chart-5: #d6a952;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1c2a22;
+  --sidebar-primary: #1f3a28;
+  --sidebar-primary-foreground: #f5f2e6;
+  --sidebar-accent: #fbf3e3;
+  --sidebar-accent-foreground: #1f3a28;
+  --sidebar-active: #e8efe8;
+  --sidebar-active-foreground: #1f3a28;
+  --sidebar-border: #dcd6c3;
+  --sidebar-ring: #b8863b;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
