@@ -37,7 +37,7 @@ function buildTheme(mode: "light" | "dark"): Theme {
         success: { main: "#2c6b3f" },
         warning: { main: "#d6a952" },
         text: { primary: "#1c2a22", secondary: "#75705f" },
-        divider: "#dcd6c3",
+        divider: "#eeeeee",
       };
 
   return createTheme({
@@ -128,11 +128,11 @@ function buildTheme(mode: "light" | "dark"): Theme {
       MuiMenu: {
         styleOverrides: {
           paper: {
-            borderRadius: radius + 2,
+            borderRadius: radius,
             border: `1px solid ${palette.divider}`,
             boxShadow: isDark
               ? "0 12px 32px rgba(0,0,0,0.45)"
-              : "0 12px 32px rgba(28,42,34,0.12)",
+              : "0 8px 24px rgba(0, 0, 0, 0.10)",
           },
           list: { paddingTop: 0, paddingBottom: 0 },
         },
@@ -140,19 +140,22 @@ function buildTheme(mode: "light" | "dark"): Theme {
       MuiPopover: {
         styleOverrides: {
           paper: {
-            borderRadius: radius + 2,
+            borderRadius: radius,
             border: `1px solid ${palette.divider}`,
             boxShadow: isDark
               ? "0 12px 32px rgba(0,0,0,0.45)"
-              : "0 12px 32px rgba(28,42,34,0.12)",
+              : "0 8px 24px rgba(0, 0, 0, 0.10)",
           },
         },
       },
       MuiDialog: {
         styleOverrides: {
           paper: {
-            borderRadius: radius * 2,
+            borderRadius: 14,
             border: `1px solid ${palette.divider}`,
+            boxShadow: isDark
+              ? "0 12px 32px rgba(0,0,0,0.45)"
+              : "0 8px 24px rgba(0, 0, 0, 0.10)",
           },
         },
       },

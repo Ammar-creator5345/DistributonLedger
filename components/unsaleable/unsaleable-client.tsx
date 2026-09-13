@@ -220,7 +220,7 @@ export function UnsaleableClient({
 
       <div className="rounded-lg border border-border bg-card p-5 shadow-sm">
         <h2 className="mb-3 font-heading text-lg font-semibold">Unsaleable Stock Sale log</h2>
-        <div className="overflow-x-auto rounded-md border">
+        <div className="overflow-x-auto rounded-lg border">
           <Table>
             <TableHeader>
               <TableRow>

@@ -142,7 +142,7 @@ function Sidebar({ className, children }: { className?: string; children?: React
           size="small"
           onClick={toggleSidebar}
           aria-label="Toggle sidebar"
-          className="rounded-lg text-sidebar-foreground hover:bg-sidebar-accent"
+          className="rounded-md text-sidebar-foreground hover:bg-sidebar-accent"
         >
           {state === "expanded" ? (
             <ChevronLeftRoundedIcon fontSize="small" />
@@ -163,7 +163,7 @@ function SidebarTrigger({ className }: { className?: string }) {
       data-slot="sidebar-trigger"
       size="small"
       onClick={toggleSidebar}
-      className={cn("rounded-lg", className)}
+      className={cn("rounded-md", className)}
       aria-label="Toggle sidebar"
     >
       <PanelLeftIcon className="size-4" />
@@ -237,7 +237,7 @@ function SidebarMenuButton({
   void asChild
 
   const classes = cn(
-    "group/menu-button flex w-full items-center gap-2.5 overflow-hidden rounded-lg p-2 text-left text-sm font-medium transition-colors outline-none [&_svg]:size-4 [&_svg]:shrink-0",
+    "group/menu-button flex w-full items-center gap-2.5 overflow-hidden rounded-md p-2 text-left text-sm font-medium transition-colors outline-none [&_svg]:size-4 [&_svg]:shrink-0",
     "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
     "focus-visible:ring-2 focus-visible:ring-sidebar-ring",
     "data-[active=true]:bg-sidebar-active data-[active=true]:font-medium data-[active=true]:text-sidebar-active-foreground data-[active=true]:shadow-sm",

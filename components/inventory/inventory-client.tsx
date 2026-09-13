@@ -197,7 +197,7 @@ export function InventoryClient({
             Stock movement — {formatDateSlash(movement.from)}
             {movement.from !== movement.to ? `-${formatDateSlash(movement.to)}` : ""}
           </h2>
-          <div className="overflow-x-auto rounded-md border">
+          <div className="overflow-x-auto rounded-lg border">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -248,7 +248,7 @@ export function InventoryClient({
           <h2 className="mb-3 font-heading text-lg font-semibold">
             {view === "receiving" ? "Warehouse receiving log" : "Unsaleable stock log"}
           </h2>
-          <div className="overflow-x-auto rounded-md border">
+          <div className="overflow-x-auto rounded-lg border">
             <Table>
               <TableHeader>
                 <TableRow>

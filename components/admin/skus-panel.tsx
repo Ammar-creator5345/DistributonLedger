@@ -129,7 +129,7 @@ export function SkusPanel({ initial }: { initial: SkuRow[] }) {
           taken from this price list. Distributor Rate is the cost base used only to calculate
           profit.
         </p>
-        <div className="overflow-x-auto rounded-md border">
+        <div className="overflow-x-auto rounded-lg border">
           <Table>
             <TableHeader>
               <TableRow>

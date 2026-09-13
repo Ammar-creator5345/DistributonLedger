@@ -151,7 +151,7 @@ function Select({ value, defaultValue, onValueChange, disabled, name, children }
         if (!selected) return <span className="text-muted-foreground">{placeholder}</span>
         return labelMap.get(selected) ?? selected
       }}
-      className={cn("w-full rounded-lg text-sm", className)}
+      className={cn("w-full rounded-md text-sm", className)}
       sx={{
         height: 45,
         minHeight: 45,

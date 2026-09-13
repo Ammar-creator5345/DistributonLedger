@@ -400,7 +400,7 @@ function OverviewTab({
 
       <div className="rounded-lg border border-border bg-card p-5 shadow-sm">
         <h2 className="mb-3 font-heading text-lg font-semibold">Vouchers in range</h2>
-        <div className="overflow-x-auto rounded-md border">
+        <div className="overflow-x-auto rounded-lg border">
           <Table>
             <TableHeader>
               <TableRow>
@@ -457,7 +457,7 @@ function TopPerformanceTab({
   function renderRows(rows: RevenueRow[], label: string) {
     if (!loading && !rows.length) return <p className="py-6 text-center text-sm text-muted-foreground">No {label} sales in this range.</p>;
     return (
-      <div className="overflow-x-auto rounded-md border">
+      <div className="overflow-x-auto rounded-lg border">
         <Table>
           <TableHeader>
             <TableRow>
@@ -548,7 +548,7 @@ function AvgTab({
       {!loading && !rows.length ? (
         <p className="py-6 text-center text-sm text-muted-foreground">No sales in this range.</p>
       ) : (
-        <div className="overflow-x-auto rounded-md border">
+        <div className="overflow-x-auto rounded-lg border">
           <Table>
             <TableHeader>
               <TableRow>

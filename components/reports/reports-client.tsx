@@ -223,7 +223,7 @@ export function ReportsClient({
         )}
 
         {tab === "sales" && (
-          <div className="overflow-x-auto rounded-md border">
+          <div className="overflow-x-auto rounded-lg border">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -257,7 +257,7 @@ export function ReportsClient({
         )}
 
         {tab === "revenue" && (
-          <div className="overflow-x-auto rounded-md border">
+          <div className="overflow-x-auto rounded-lg border">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -291,7 +291,7 @@ export function ReportsClient({
         )}
 
         {tab === "profit" && (
-          <div className="overflow-x-auto rounded-md border">
+          <div className="overflow-x-auto rounded-lg border">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -329,7 +329,7 @@ export function ReportsClient({
         )}
 
         {(tab === "expenses" || tab === "other") && (
-          <div className="overflow-x-auto rounded-md border">
+          <div className="overflow-x-auto rounded-lg border">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -378,7 +378,7 @@ export function ReportsClient({
               />
             </div>
             {cashView === "detail" ? (
-              <div className="overflow-x-auto rounded-md border">
+              <div className="overflow-x-auto rounded-lg border">
                 <Table>
                   <TableHeader>
                     <TableRow>
@@ -422,7 +422,7 @@ export function ReportsClient({
                 </Table>
               </div>
             ) : (
-              <div className="overflow-x-auto rounded-md border">
+              <div className="overflow-x-auto rounded-lg border">
                 <Table>
                   <TableHeader>
                     <TableRow>

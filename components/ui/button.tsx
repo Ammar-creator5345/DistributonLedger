@@ -86,7 +86,7 @@ function Button({
         data-slot="button"
         size={height <= 28 ? "small" : "medium"}
         color={muiColor === "inherit" ? "default" : muiColor}
-        className={cn("rounded-lg", className)}
+        className={cn("rounded-md", className)}
         sx={{ ...commonSx, width: height, height, borderRadius: "var(--radius-md)" }}
         {...(props as React.ComponentProps<typeof IconButton>)}
       >
@@ -116,7 +116,7 @@ function buttonVariants({
   size = "default",
 }: { variant?: ButtonVariant; size?: ButtonSize } = {}) {
   return cn(
-    "inline-flex shrink-0 items-center justify-center gap-1.5 rounded-lg text-sm font-semibold whitespace-nowrap transition-colors outline-none select-none disabled:pointer-events-none disabled:opacity-50",
+    "inline-flex shrink-0 items-center justify-center gap-1.5 rounded-md text-sm font-semibold whitespace-nowrap transition-colors outline-none select-none disabled:pointer-events-none disabled:opacity-50",
     variant === "default" && "bg-primary text-primary-foreground hover:opacity-90",
     variant === "outline" && "border border-border bg-background hover:bg-muted",
     variant === "secondary" && "bg-secondary text-secondary-foreground hover:opacity-90",

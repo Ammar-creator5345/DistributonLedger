@@ -46,13 +46,20 @@
   --color-negative: var(--negative);
   --color-gold: var(--gold);
   --color-gold-2: var(--gold-2);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
+  /*
+    Fixed pixel tiers (not proportional to --radius) so each maps to one specific role:
+    sm = chips/badges (6px), md = inputs/buttons (8px), lg/xl = cards/sections/tables (12px),
+    2xl = modals (14px). 3xl/4xl are unused in the app; left proportional.
+  */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 0.875rem;
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  /* Subtle card shadow, matching the shared shadow-sm utility used across the app. */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 /*
@@ -77,9 +84,9 @@
   --accent: #fbf3e3;
   --accent-foreground: #1f3a28;
   --destructive: #a13d3d;
-  --border: #dcd6c3;
+  --border: #eeeeee;
   --border-soft: #e8e3d3;
-  --input: #dcd6c3;
+  --input: #eeeeee;
   --ring: #b8863b;
   --positive: #2c6b3f;
   --negative: #a13d3d;

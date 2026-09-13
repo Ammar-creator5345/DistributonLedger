@@ -113,7 +113,7 @@ export function SalesmenPanel({ initial }: { initial: SalesmanRow[] }) {
         </div>
       </CardHeader>
       <CardContent>
-        <div className="overflow-x-auto rounded-md border">
+        <div className="overflow-x-auto rounded-lg border">
           <Table>
             <TableHeader>
               <TableRow>

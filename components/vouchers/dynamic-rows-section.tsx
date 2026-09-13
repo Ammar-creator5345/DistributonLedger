@@ -50,7 +50,7 @@ export function DynamicRowsSection({
           No entries yet. Press Ctrl+L in this section to add a row.
         </p>
       ) : (
-        <div className="overflow-x-auto rounded-md border">
+        <div className="overflow-x-auto rounded-lg border">
           <Table>
             <TableHeader>
               <TableRow>

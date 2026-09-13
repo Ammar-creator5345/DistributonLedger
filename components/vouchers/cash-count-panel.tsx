@@ -28,7 +28,7 @@ export function CashCountPanel({
   return (
     <div>
       <h2 className="mb-3 font-heading text-lg font-semibold">Cash counting</h2>
-      <div className="overflow-x-auto rounded-md border">
+      <div className="overflow-x-auto rounded-lg border">
         <Table>
           <TableHeader>
             <TableRow>
