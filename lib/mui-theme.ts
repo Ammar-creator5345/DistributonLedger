@@ -100,7 +100,14 @@ function buildTheme(mode: "light" | "dark"): Theme {
           // floating label's notch) — since none of our fields use a floating label, that offset
           // just makes the visible border ~5px taller than the box we sized to 45px. Zeroing it
           // makes the drawn border match the root exactly, which a height override alone can't fix.
-          notchedOutline: { top: 0 },
+          // The fieldset's <legend> child is the other half of this: even with top pinned to 0,
+          // browsers reserve vertical space around the border for the legend's own height (11px
+          // by default, used for the floating-label notch), which visibly pushes the painted
+          // border down a few px regardless of the fieldset's actual box position — verified
+          // against a real rendered page (a Select's border started ~5px lower than a plain
+          // Input's despite both boxes measuring the same 45px via getBoundingClientRect).
+          // Hiding the legend removes that reservation entirely.
+          notchedOutline: { top: 0, "& legend": { display: "none" } },
         },
       },
       MuiSelect: {
