@@ -104,13 +104,11 @@ interface DashboardData {
 }
 
 export function DashboardClient({
-  businessName,
   currency,
   salesmen,
   skus,
   initial,
 }: {
-  businessName: string;
   currency: string;
   salesmen: SalesmanRow[];
   skus: SkuRow[];
@@ -188,7 +186,7 @@ export function DashboardClient({
 
   return (
     <div className="flex flex-col gap-4">
-      <PageHeader title="Dashboard" description={businessName} />
+      <PageHeader title="Dashboard" description="Overview of your sales, inventory and cash position." />
 
       <div className="grid grid-cols-2 gap-3 rounded-lg border border-border bg-card p-4 shadow-sm sm:grid-cols-4">
         <div>

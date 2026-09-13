@@ -136,7 +136,7 @@ function Sidebar({ className, children }: { className?: string; children?: React
         className
       )}
     >
-      <div className={cn("absolute z-20 flex top-4 border -right-4 rounded-full w-fit shrink-0 items-center bg-white", state === "expanded" ? "justify-end" : "justify-center")}>
+      <div className={cn("absolute z-20 flex top-4 border -right-4 rounded-full w-fit shrink-0 items-center bg-card", state === "expanded" ? "justify-end" : "justify-center")}>
         <IconButton
           data-slot="sidebar-rail-trigger"
           size="small"
