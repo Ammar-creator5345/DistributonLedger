@@ -45,7 +45,9 @@ export function ConfirmDialog({
       <IconButton
         size="small"
         onClick={() => onOpenChange(false)}
-        className="absolute top-2 right-2"
+        // See components/ui/dialog.tsx: MUI's ButtonBase hardcodes position:relative for its
+        // ripple effect, which beats a Tailwind `absolute` class here — sx is what actually wins.
+        sx={{ position: "absolute", top: 8, right: 8 }}
         aria-label="Close"
       >
         <CloseIcon fontSize="small" />

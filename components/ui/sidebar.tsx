@@ -130,13 +130,13 @@ function Sidebar({ className, children }: { className?: string; children?: React
       data-state={state}
       data-slot="sidebar"
       className={cn(
-        "relative hidden shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-[width] duration-300 ease-in-out md:flex",
-        "pt-3.75",
+        "relative z-10 hidden shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-[width] duration-300 ease-in-out md:flex",
+        "pt-14",
         state === "expanded" ? "w-(--sidebar-width) pl-3.75" : "w-(--sidebar-width-icon) pl-0",
         className
       )}
     >
-      <div className={cn("flex shrink-0 items-center pb-1", state === "expanded" ? "justify-end pr-2" : "justify-center")}>
+      <div className={cn("absolute z-20 flex top-4 border -right-4 rounded-full w-fit shrink-0 items-center bg-white", state === "expanded" ? "justify-end" : "justify-center")}>
         <IconButton
           data-slot="sidebar-rail-trigger"
           size="small"

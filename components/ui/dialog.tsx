@@ -91,7 +91,11 @@ function DialogContent({
         <IconButton
           size="small"
           onClick={() => onOpenChange(false)}
-          className="absolute top-2 right-2"
+          // MUI's ButtonBase hardcodes `position: relative` in its own base styles (for the
+          // ripple effect), which wins over a Tailwind `absolute` class regardless of
+          // specificity in this app's SSR setup — sx generates a style MUI's own cascade
+          // respects, so the override actually takes effect here.
+          sx={{ position: "absolute", top: 8, right: 8 }}
           aria-label="Close"
         >
           <CloseIcon fontSize="small" />
